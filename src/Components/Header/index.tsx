@@ -1,8 +1,22 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navItems = ['About', 'Works', 'Contact'];
+  const navItems = [
+    {
+      title: "About",
+      link: "/pedrofrancodev/about"
+    },
+    {
+      title: "Works",
+      link: "/pedrofrancodev/works"
+    },
+    {
+      title: "Contact",
+      link: "/pedrofrancodev/contact"
+    },
+  ];
 
   return(
     <header className="text-white p-6 flex justify-between items-center relative z-50 md:container mx-auto">
@@ -12,14 +26,14 @@ export function Header() {
       <nav className="hidden md:flex gap-10">
         <ul className="flex gap-10">
           {navItems.map((item) => (
-            <li key={item} className="group relative">
-              <a
-                href="#"
+            <li key={item.title} className="group relative">
+              <NavLink
+                to={item.link}
                 className="inline-block transition-transform duration-200 group-hover:-translate-y-1"
               >
-                {item}
+                {item.title}
                 <span className="absolute left-0 -bottom-1 h-0.5 w-full bg-white transform scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -55,10 +69,10 @@ export function Header() {
       >
         <ul className="flex flex-col items-center justify-center gap-6 mt-20 text-lg">
           {navItems.map((item) => (
-            <li key={item}>
-              <a href="#" onClick={() => setMenuOpen(false)}>
-                {item}
-              </a>
+            <li key={item.title}>
+              <NavLink to={item.link} onClick={() => setMenuOpen(false)}>
+                {item.title}
+              </NavLink>
             </li>
           ))}
         </ul>
